@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 from dotenv import load_dotenv
 from helpers import get_environmental_impact, search_by_species, get_reccommended_plants
+import os
 
 load_dotenv()
 
@@ -25,3 +26,7 @@ def get_by_species():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    # Railway provides a PORT environment variable
+    port = int(os.environ.get("PORT", 5000))
+    # '0.0.0.0' allows external access
+    app.run(host='0.0.0.0', port=port)
